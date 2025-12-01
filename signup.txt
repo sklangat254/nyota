@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Account - Nyota Fund Kenya</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0b8a44, #0a5830);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            background: #ffffff;
+            width: 90%;
+            max-width: 380px;
+            padding: 40px 30px;
+            border-radius: 14px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            animation: fadeIn 0.6s ease;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0; transform: translateY(20px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+
+        .logo {
+            width: 70px;
+            height: 70px;
+            margin-bottom: 10px;
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #0b8a44;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            font-size: 15px;
+            color: #555;
+            margin-bottom: 25px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 15px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #0b8a44;
+            box-shadow: 0 0 5px rgba(11,138,68,0.3);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 17px;
+            font-weight: 600;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .register-btn {
+            background: #0b8a44;
+            color: white;
+        }
+
+        .register-btn:hover {
+            background: #096d36;
+        }
+
+        .login-link {
+            margin-top: 15px;
+            display: block;
+            font-size: 14px;
+            color: #0b8a44;
+            text-decoration: none;
+        }
+
+        .login-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+
+        <!-- Logo Icon -->
+        <svg class="logo" viewBox="0 0 24 24" fill="#0b8a44">
+            <path d="M12 2l2.9 6.9L22 9.4l-5 4.9 1.2 7.7L12 18.6l-6.2 3.4L7 14.3 2 9.4l7.1-0.5L12 2z"/>
+        </svg>
+
+        <div class="title">Create Account</div>
+        <div class="subtitle">Join Nyota Fund Kenya</div>
+
+        <input type="text" placeholder="Full Name" />
+        <input type="text" placeholder="Phone Number" />
+        <input type="text" placeholder="National ID Number" />
+        <input type="password" placeholder="Password" />
+        <input type="password" placeholder="Confirm Password" />
+
+        <button class="btn register-btn">Create Account</button>
+
+        <a href="login.html" class="login-link">Already have an account? Login</a>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nyota Fund — Personal Profile</title>
+
+<style>
+    :root {
+        --primary: #0b8a44;
+        --primary-dark: #0a5830;
+        --bg-light: #f5fff7;
+        --radius: 18px;
+        --text-dark: #1b1b1b;
+    }
+
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background: var(--bg-light);
+    }
+
+    /* HEADER */
+    .header {
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        padding: 50px 20px 75px;
+        text-align: center;
+        color: #fff;
+        border-bottom-left-radius: 40px;
+        border-bottom-right-radius: 40px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    .header h1 {
+        font-size: 1.7rem;
+        margin: 0;
+        font-weight: 800;
+    }
+
+    .header p {
+        font-size: 1rem;
+        margin-top: 8px;
+        opacity: 0.9;
+    }
+
+    /* CARD */
+    .card {
+        background: #fff;
+        width: 88%;
+        margin: -45px auto 30px;
+        padding: 25px;
+        border-radius: var(--radius);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.07);
+        animation: fadeIn 0.6s ease-out;
+    }
+
+    @keyframes fadeIn {
+        from {opacity: 0; transform: translateY(25px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
+
+    /* INPUTS */
+    .group {
+        margin-bottom: 18px;
+    }
+
+    .group label {
+        display: block;
+        font-size: 0.95rem;
+        font-weight: 600;
+        margin-bottom: 5px;
+        color: var(--text-dark);
+    }
+
+    select, input, textarea {
+        width: 100%;
+        padding: 14px;
+        border: 1.5px solid #d5e6da;
+        border-radius: var(--radius);
+        outline: none;
+        font-size: 1rem;
+        background: #fff;
+        transition: .25s;
+    }
+
+    select:focus, input:focus, textarea:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(11,138,68,0.18);
+    }
+
+    textarea {
+        resize: none;
+    }
+
+    /* BUTTON */
+    .btn {
+        width: 100%;
+        padding: 15px;
+        border: none;
+        border-radius: 50px;
+        background: var(--primary);
+        color: white;
+        font-size: 1.1rem;
+        font-weight: 700;
+        cursor: pointer;
+        margin-top: 15px;
+        transition: 0.25s;
+    }
+
+    .btn:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 7px 18px rgba(0,128,64,0.25);
+    }
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <h1>Your Profile Details</h1>
+    <p>Help us understand your background for better fund processing.</p>
+</div>
+
+<!-- CARD -->
+<div class="card">
+
+    <div class="group">
+        <label for="education">Level of Education</label>
+        <select id="education">
+            <option value="">Select education level</option>
+            <option value="primary">Primary</option>
+            <option value="secondary">Secondary</option>
+            <option value="diploma">Certificate / Diploma</option>
+            <option value="degree">Bachelor's Degree</option>
+            <option value="masters">Master's Degree</option>
+            <option value="none">Other</option>
+        </select>
+    </div>
+
+    <div class="group">
+        <label>Skills / Expertise</label>
+        <textarea rows="3" placeholder="E.g. Carpentry, Programming, Tailoring, Teaching"></textarea>
+    </div>
+
+    <div class="group">
+        <label>Monthly Income (Ksh)</label>
+        <input type="number" placeholder="E.g. 15000">
+    </div>
+
+    <div class="group">
+        <label>Additional Information</label>
+        <textarea rows="3" placeholder="Business experience, community work, achievements..."></textarea>
+    </div>
+
+    <button class="btn" onclick="nextPage()">Continue</button>
+
+</div>
+
+<script>
+function nextPage() {
+    window.location.href = "purposepage.html";
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nyota Fund — Application Status</title>
+<style>
+:root {
+    --primary: #0b8a44;
+    --primary-dark: #0a5830;
+    --light: #f5fff7;
+    --radius: 18px;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: var(--light);
+    color: #333;
+}
+
+/* HEADER */
+.header {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    padding: 50px 20px 80px;
+    text-align: center;
+    color: white;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 800;
+}
+
+.header p {
+    margin-top: 8px;
+    opacity: 0.9;
+    font-size: 1rem;
+}
+
+/* CARD */
+.card {
+    background: #fff;
+    width: 90%;
+    max-width: 500px;
+    margin: -60px auto 25px;
+    padding: 25px;
+    border-radius: var(--radius);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.07);
+    animation: fadeUp 0.55s ease-out;
+}
+
+@keyframes fadeUp {
+    from {opacity: 0; transform: translateY(35px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+.card h2 {
+    text-align: center;
+    color: var(--primary-dark);
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+}
+
+/* STATUS TABLE */
+.status-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.status-table td {
+    padding: 12px 8px;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 1rem;
+}
+
+.status-table td.label {
+    font-weight: 600;
+    color: #555;
+    width: 45%;
+}
+
+.status-table td.value {
+    color: var(--primary-dark);
+    font-weight: 500;
+}
+
+/* STATUS BADGE */
+.status-badge {
+    display: inline-block;
+    padding: 8px 15px;
+    background: #fff3cd;
+    color: #856404;
+    border-radius: 25px;
+    font-weight: 700;
+    text-align: center;
+}
+
+/* FOOTER */
+.footer {
+    text-align: center;
+    padding: 20px 10px;
+    font-size: 0.9rem;
+    color: #888;
+    background: #f1f1f1;
+    border-top: 1px solid #ddd;
+}
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <h1>Application Status</h1>
+    <p>Check the current status of your loan application</p>
+</div>
+
+<!-- CARD -->
+<div class="card">
+    <h2>Your Application Details</h2>
+    <table class="status-table">
+        <tr>
+            <td class="label">Full Name</td>
+            <td class="value" id="fullName">John Doe</td>
+        </tr>
+        <tr>
+            <td class="label">Phone Number</td>
+            <td class="value" id="phone">07XXXXXXXX</td>
+        </tr>
+        <tr>
+            <td class="label">Amount Applied</td>
+            <td class="value" id="amount">Ksh 0</td>
+        </tr>
+        <tr>
+            <td class="label">Date Applied</td>
+            <td class="value" id="dateApplied">01-Dec-2025</td>
+        </tr>
+        <tr>
+            <td class="label">Disbursement Status</td>
+            <td class="value"><span class="status-badge">Pending</span></td>
+        </tr>
+    </table>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    &copy; 2025 Nyota Fund. All rights reserved.
+</div>
+
+<script>
+document.getElementById("fullName").textContent = localStorage.getItem("fullName") || "John Doe";
+document.getElementById("phone").textContent = localStorage.getItem("phone") || "07XXXXXXXX";
+document.getElementById("amount").textContent = "Ksh " + (localStorage.getItem("amount") || "5000");
+document.getElementById("dateApplied").textContent = localStorage.getItem("dateApplied") || new Date().toLocaleDateString();
+</script>
+
+</body>
+</html>

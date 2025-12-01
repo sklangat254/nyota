@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nyota Fund — Purpose of Fund</title>
+
+<style>
+    :root {
+        --primary: #0b8a44;
+        --primary-dark: #0a5830;
+        --light: #f5fff7;
+        --radius: 18px;
+    }
+
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background: var(--light);
+    }
+
+    /* HEADER SECTION */
+    .header {
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        padding: 55px 20px 90px;
+        color: white;
+        text-align: center;
+        border-bottom-left-radius: 40px;
+        border-bottom-right-radius: 40px;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    }
+
+    .header h1 {
+        margin: 0;
+        font-size: 1.7rem;
+        font-weight: 800;
+    }
+
+    .header p {
+        margin-top: 8px;
+        font-size: 1rem;
+        opacity: 0.95;
+    }
+
+    /* CARD */
+    .card {
+        background: white;
+        width: 88%;
+        margin: -55px auto 40px;
+        padding: 25px;
+        border-radius: var(--radius);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.07);
+        animation: fadeUp 0.5s ease-out;
+    }
+
+    @keyframes fadeUp {
+        from {opacity: 0; transform: translateY(35px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
+
+    /* OPTIONS */
+    .option {
+        border: 1.6px solid #e0f0e6;
+        padding: 15px;
+        border-radius: var(--radius);
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 15px;
+        cursor: pointer;
+        transition: .25s;
+    }
+
+    .option:hover {
+        border-color: var(--primary);
+        background: #ecfff3;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(11,138,68,0.15);
+    }
+
+    .option.selected {
+        background: #ecfff3;
+        border-color: var(--primary);
+        box-shadow: 0 6px 15px rgba(11,138,68,0.20);
+    }
+
+    .icon {
+        background: var(--primary);
+        color: white;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3rem;
+    }
+
+    .text strong {
+        font-size: 1.1rem;
+        color: #1b1b1b;
+    }
+
+    .text p {
+        margin: 3px 0 0;
+        font-size: 0.87rem;
+        color: #555;
+    }
+
+    /* BUTTON */
+    .btn {
+        width: 100%;
+        padding: 15px;
+        background: var(--primary);
+        border: none;
+        color: white;
+        font-size: 1.15rem;
+        border-radius: 50px;
+        margin-top: 10px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: .25s;
+    }
+
+    .btn:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 7px 18px rgba(11,138,68,0.25);
+    }
+</style>
+
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <h1>Purpose of Your Fund</h1>
+    <p>Select what you intend to use the Nyota Fund for.</p>
+</div>
+
+<!-- CARD -->
+<div class="card">
+
+    <div class="option" onclick="selectOption(this)">
+        <div class="icon">💼</div>
+        <div class="text">
+            <strong>Start or Grow a Business</strong>
+            <p>Boost your income through enterprise growth.</p>
+        </div>
+    </div>
+
+    <div class="option" onclick="selectOption(this)">
+        <div class="icon">📚</div>
+        <div class="text">
+            <strong>Education Support</strong>
+            <p>Pay school fees, buy books, or continue studies.</p>
+        </div>
+    </div>
+
+    <div class="option" onclick="selectOption(this)">
+        <div class="icon">🏠</div>
+        <div class="text">
+            <strong>Household & Family</strong>
+            <p>Emergency needs, medical, or essential bills.</p>
+        </div>
+    </div>
+
+    <div class="option" onclick="selectOption(this)">
+        <div class="icon">🚜</div>
+        <div class="text">
+            <strong>Agriculture</strong>
+            <p>Farming tools, seedlings, animal feed, fertilizers.</p>
+        </div>
+    </div>
+
+    <div class="option" onclick="selectOption(this)">
+        <div class="icon">🔧</div>
+        <div class="text">
+            <strong>Tools & Equipment</strong>
+            <p>Improve your work efficiency and daily output.</p>
+        </div>
+    </div>
+
+    <button class="btn" onclick="goNext()">Continue</button>
+</div>
+
+<script>
+let selectedPurpose = "";
+
+function selectOption(el) {
+    document.querySelectorAll(".option").forEach(opt => opt.classList.remove("selected"));
+    el.classList.add("selected");
+    selectedPurpose = el.innerText.trim();
+}
+
+function goNext() {
+    if (!selectedPurpose) {
+        alert("Please select the purpose of the fund.");
+        return;
+    }
+
+    localStorage.setItem("fundPurpose", selectedPurpose);
+    window.location.href = "eligibilitycheck.html"; 
+}
+</script>
+
+</body>
+</html>

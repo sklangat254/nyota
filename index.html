@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nyota Fund Kenya</title>
+
+<style>
+/* GLOBAL STYLES */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f5f7fa;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    align-items: center;
+}
+
+/* HEADER */
+header {
+    width: 100%;
+    background: linear-gradient(135deg, #0b8a44, #0a5830);
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 28px;
+    font-weight: 700;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* MAIN CARD */
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+}
+
+.card {
+    background: white;
+    width: 100%;
+    max-width: 450px;
+    padding: 40px 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    text-align: center;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {opacity: 0; transform: translateY(40px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+.card h1 {
+    font-size: 26px;
+    color: #222;
+    margin-bottom: 15px;
+}
+
+.card p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 25px;
+}
+
+.card .btn {
+    background: #0b8a44;
+    color: white;
+    padding: 14px 50px;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.card .btn:hover {
+    background: #0a763a;
+    transform: translateY(-2px);
+}
+
+.card .small-text {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #888;
+}
+
+/* FOOTER */
+footer {
+    width: 100%;
+    text-align: center;
+    padding: 20px 10px;
+    font-size: 14px;
+    color: #666;
+    background: #f1f1f1;
+    border-top: 1px solid #ddd;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>Nyota Fund Kenya</header>
+
+<main>
+    <div class="card">
+        <h1>Get Instant Support Today</h1>
+        <p>Fast and simple financial assistance directly to your M-Pesa account.</p>
+        <button class="btn" onclick="goNext()">Apply Now</button>
+        <p class="small-text">Borrow Ksh 1,000 – 50,000</p>
+    </div>
+</main>
+
+<script>
+        function goNext() {
+        window.location.href = "login.html"; 
+    }
+</script>
+
+<footer>© 2025 Nyota Fund Kenya</footer>
+
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nyota Fund — Checking Eligibility</title>
+
+<style>
+:root {
+    --primary: #0b8a44;
+    --primary-dark: #0a5830;
+    --light: #f5fff7;
+}
+
+body {
+    margin: 0;
+    background: var(--light);
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    text-align: center;
+}
+
+/* Container */
+.container {
+    animation: fadeIn 1s ease-out;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(25px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+/* Spinner */
+.ring {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    border: 6px solid #c7f7d9;
+    border-top-color: var(--primary);
+    animation: spin 1.2s linear infinite;
+    margin: 0 auto 25px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+@keyframes spin {
+    to {transform: rotate(360deg);}
+}
+
+/* Tick */
+.tick-circle {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px;
+    animation: popIn 0.5s ease-out;
+}
+
+.tick-circle svg {
+    width: 60px;
+    height: 60px;
+    fill: white;
+}
+
+/* Pop-in animation for tick */
+@keyframes popIn {
+    from {transform: scale(0);}
+    to {transform: scale(1);}
+}
+
+h1 {
+    color: var(--primary-dark);
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+    font-weight: 800;
+}
+
+p {
+    color: #555;
+    font-size: 1rem;
+    width: 80%;
+    margin: 0 auto 20px;
+    line-height: 1.5;
+}
+
+button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 12px 35px;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: var(--primary-dark);
+}
+
+/* Loading dots animation */
+.loading-dots span {
+    animation: blink 1.5s infinite;
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: var(--primary);
+}
+
+@keyframes blink {
+    0%, 20% {opacity: 0;}
+    50% {opacity: 1;}
+    100% {opacity: 0;}
+}
+
+.loading-dots span:nth-child(2){ animation-delay: .3s; }
+.loading-dots span:nth-child(3){ animation-delay: .6s; }
+</style>
+</head>
+<body>
+
+<div class="container" id="container">
+    <!-- LOADING ANIMATION -->
+    <div class="ring" id="loader"></div>
+
+    <h1>Checking Your Eligibility</h1>
+
+    <p>
+        Please wait as we securely analyze your information<br>
+        to determine the amount you qualify for.
+    </p>
+
+    <p class="loading-dots" style="margin-top: 20px;">
+        <span>.</span><span>.</span><span>.</span>
+    </p>
+</div>
+
+<script>
+    // After 3.5 seconds, replace spinner with tick
+    setTimeout(() => {
+        const container = document.getElementById('container');
+        container.innerHTML = `
+            <div class="tick-circle">
+                <svg viewBox="0 0 52 52">
+                    <path d="M14 27l10 10 20-20" stroke="white" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <h1>Congratulations!</h1>
+            <p>You qualify for <strong>KES 50,000</strong>.</p>
+            <button onclick="proceed()">Proceed</button>
+        `;
+    }, 3500);
+
+    function proceed() {
+        window.location.href = 'limitpage.html'; // Replace with your actual next page
+    }
+</script>
+
+</body>
+</html>
