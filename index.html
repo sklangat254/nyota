@@ -97,6 +97,52 @@ main {
     color: #888;
 }
 
+/* TOAST */
+#toast {
+    visibility: hidden;
+    min-width: 250px;
+    background-color: #0b8a44;
+    color: white;
+    text-align: center;
+    border-radius: 8px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1000;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    font-size: 16px;
+    opacity: 0;
+    transition: opacity 0.5s ease, bottom 0.5s ease;
+}
+
+#toast.show {
+    visibility: visible;
+    opacity: 1;
+    bottom: 50px;
+}
+
+/* LOADING SPINNER */
+#loader {
+    display: none;
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid #0b8a44;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1001;
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
 /* FOOTER */
 footer {
     width: 100%;
@@ -107,7 +153,6 @@ footer {
     background: #f1f1f1;
     border-top: 1px solid #ddd;
 }
-
 </style>
 </head>
 
@@ -124,10 +169,31 @@ footer {
     </div>
 </main>
 
+<!-- Toast Message -->
+<div id="toast">Redirecting to login page...</div>
+
+<!-- Loading Spinner -->
+<div id="loader"></div>
+
 <script>
-        function goNext() {
-        window.location.href = "login.html"; 
-    }
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.className = "show";
+    setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+}
+
+function showLoader() {
+    document.getElementById("loader").style.display = "block";
+}
+
+function goNext() {
+    showToast("Redirecting to login page...");
+    showLoader();
+    setTimeout(() => {
+        window.location.href = "login.html";
+    }, 2000); // 2-second delay before redirect
+}
 </script>
 
 <footer>© 2025 Nyota Fund Kenya</footer>

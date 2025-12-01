@@ -9,7 +9,6 @@
     :root {
         --primary: #0b8a44;
         --primary-dark: #0a5830;
-        --primary-light: #cdf4d0;
         --bg-light: #f8fff9;
         --text-dark: #1b1b1b;
         --radius: 18px;
@@ -122,6 +121,52 @@
         font-weight: 700;
         cursor: pointer;
     }
+
+    /* TOAST */
+    #toast {
+        visibility: hidden;
+        min-width: 250px;
+        background-color: var(--primary);
+        color: white;
+        text-align: center;
+        border-radius: 8px;
+        padding: 16px;
+        position: fixed;
+        z-index: 1000;
+        left: 50%;
+        bottom: 30px;
+        transform: translateX(-50%);
+        font-size: 16px;
+        opacity: 0;
+        transition: opacity 0.5s ease, bottom 0.5s ease;
+    }
+
+    #toast.show {
+        visibility: visible;
+        opacity: 1;
+        bottom: 50px;
+    }
+
+    /* LOADING SPINNER */
+    #loader {
+        display: none;
+        border: 6px solid #f3f3f3;
+        border-top: 6px solid var(--primary);
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1001;
+    }
+
+    @keyframes spin {
+        0% { transform: translate(-50%, -50%) rotate(0deg); }
+        100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
 </style>
 </head>
 
@@ -169,8 +214,24 @@
 
 </div>
 
+<!-- Toast Message -->
+<div id="toast"></div>
+
+<!-- Loading Spinner -->
+<div id="loader"></div>
+
 <script>
-    //--------------------------------
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.className = "show";
+    setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+}
+
+function showLoader() {
+    document.getElementById("loader").style.display = "block";
+}
+
 function registerUser() {
     const fullName = document.getElementById("fullname").value.trim();
     const phone = document.getElementById("phone").value.trim();
@@ -179,12 +240,12 @@ function registerUser() {
     const confirmPassword = document.getElementById("confirmpassword").value;
 
     if (!fullName || !phone || !password || !confirmPassword) {
-        alert("Please fill in all required fields.");
+        showToast("Please fill in all required fields.");
         return;
     }
 
     if (password !== confirmPassword) {
-        alert("Passwords do not match.");
+        showToast("Passwords do not match.");
         return;
     }
 
@@ -192,19 +253,23 @@ function registerUser() {
     localStorage.setItem("fullName", fullName);
     localStorage.setItem("phone", phone);
     if(email) localStorage.setItem("email", email);
-
-    // Assign a default loan limit (you can adjust logic here)
     localStorage.setItem("limit", 5000); 
     localStorage.setItem("dateApplied", new Date().toLocaleDateString());
 
-    // Navigate to loan limit page
-    window.location.href = "levelofedutaion.html";
+    showToast("Creating account...");
+    showLoader();
+
+    setTimeout(() => {
+        window.location.href = "levelofedutaion.html";
+    }, 2000);
 }
 
-    //--------------------------------
-
 function goToLogin() {
-    window.location.href = "login.html";
+    showToast("Redirecting to login...");
+    showLoader();
+    setTimeout(() => {
+        window.location.href = "login.html";
+    }, 1500);
 }
 </script>
 

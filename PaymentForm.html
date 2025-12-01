@@ -6,153 +6,198 @@
 <title>Nyota Fund — Payment Method</title>
 
 <style>
-    :root {
-        --primary: #0b8a44;
-        --primary-dark: #0a5830;
-        --light: #f5fff7;
-        --radius: 18px;
-    }
+:root {
+    --primary: #0b8a44;
+    --primary-dark: #0a5830;
+    --light: #f5fff7;
+    --radius: 18px;
+}
 
-    body {
-        margin: 0;
-        background: var(--light);
-        font-family: 'Segoe UI', sans-serif;
-    }
+body {
+    margin: 0;
+    background: var(--light);
+    font-family: 'Segoe UI', sans-serif;
+}
 
-    /* HEADER */
-    .header {
-        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-        padding: 55px 20px 90px;
-        color: white;
-        text-align: center;
-        border-bottom-left-radius: 40px;
-        border-bottom-right-radius: 40px;
-        box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-    }
+/* HEADER */
+.header {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    padding: 55px 20px 90px;
+    color: white;
+    text-align: center;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
 
-    .header h1 {
-        margin: 0;
-        font-size: 1.7rem;
-        font-weight: 800;
-    }
+.header h1 {
+    margin: 0;
+    font-size: 1.7rem;
+    font-weight: 800;
+}
 
-    .header p {
-        margin-top: 10px;
-        opacity: 0.9;
-    }
+.header p {
+    margin-top: 10px;
+    opacity: 0.9;
+}
 
-    /* CARD */
-    .card {
-        background: white;
-        width: 90%;
-        margin: -60px auto 25px;
-        padding: 25px;
-        border-radius: var(--radius);
-        box-shadow: 0 8px 25px rgba(0,0,0,0.07);
-        animation: fadeUp 0.55s ease-out;
-    }
+/* CARD */
+.card {
+    background: white;
+    width: 90%;
+    margin: -60px auto 25px;
+    padding: 25px;
+    border-radius: var(--radius);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.07);
+    animation: fadeUp 0.55s ease-out;
+}
 
-    @keyframes fadeUp {
-        from {opacity: 0; transform: translateY(35px);}
-        to {opacity: 1; transform: translateY(0);}
-    }
+@keyframes fadeUp {
+    from {opacity: 0; transform: translateY(35px);}
+    to {opacity: 1; transform: translateY(0);}
+}
 
-    .section-title {
-        font-size: 1.15rem;
-        font-weight: 700;
-        margin-bottom: 20px;
-        color: var(--primary-dark);
-    }
+.section-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--primary-dark);
+}
 
-    /* MPESA BOX */
-    .mpesa-box {
-        border: 1.6px solid #d7f5e1;
-        background: #f0fff5;
-        padding: 18px;
-        border-radius: var(--radius);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 15px;
-    }
+/* MPESA BOX */
+.mpesa-box {
+    border: 1.6px solid #d7f5e1;
+    background: #f0fff5;
+    padding: 18px;
+    border-radius: var(--radius);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
 
-    .mpesa-left {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-    }
+.mpesa-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
 
-    .mpesa-icon {
-        background: var(--primary);
-        color: white;
-        width: 45px;
-        height: 45px;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 1.3rem;
-    }
+.mpesa-icon {
+    background: var(--primary);
+    color: white;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+}
 
-    .mpesa-number {
-        font-size: 1.1rem;
-        font-weight: 700;
-        color: #222;
-    }
+.mpesa-number {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #222;
+}
 
-    /* EDIT INPUT */
-    #editSection {
-        display: none;
-        margin-top: 15px;
-    }
+/* EDIT INPUT */
+#editSection {
+    display: none;
+    margin-top: 15px;
+}
 
-    input {
-        width: 100%;
-        padding: 14px;
-        border-radius: var(--radius);
-        border: 1.5px solid #d7e8dd;
-        font-size: 1rem;
-        outline: none;
-        transition: .25s;
-        margin-bottom: 10px;
-    }
+input {
+    width: 100%;
+    padding: 14px;
+    border-radius: var(--radius);
+    border: 1.5px solid #d7e8dd;
+    font-size: 1rem;
+    outline: none;
+    transition: .25s;
+    margin-bottom: 10px;
+}
 
-    input:focus {
-        border-color: var(--primary);
-        box-shadow: 0 0 0 3px rgba(11,138,68,0.18);
-    }
+input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(11,138,68,0.18);
+}
 
-    .edit-btn {
-        background: transparent;
-        border: none;
-        color: var(--primary-dark);
-        font-weight: 600;
-        cursor: pointer;
-        padding: 8px 0;
-        font-size: 0.9rem;
-    }
+.edit-btn {
+    background: transparent;
+    border: none;
+    color: var(--primary-dark);
+    font-weight: 600;
+    cursor: pointer;
+    padding: 8px 0;
+    font-size: 0.9rem;
+}
 
-    /* CONTINUE BUTTON */
-    .btn {
-        width: 100%;
-        padding: 15px;
-        background: var(--primary);
-        border: none;
-        color: white;
-        border-radius: 50px;
-        font-size: 1.15rem;
-        font-weight: 700;
-        cursor: pointer;
-        margin-top: 10px;
-        transition: .25s;
-    }
+/* CONTINUE BUTTON */
+.btn {
+    width: 100%;
+    padding: 15px;
+    background: var(--primary);
+    border: none;
+    color: white;
+    border-radius: 50px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: .25s;
+}
 
-    .btn:hover {
-        background: var(--primary-dark);
-        transform: translateY(-2px);
-        box-shadow: 0 7px 18px rgba(11,138,68,0.25);
-    }
+.btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 7px 18px rgba(11,138,68,0.25);
+}
 
+/* Loader */
+#loader {
+    display: none;
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid var(--primary);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1001;
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Toast */
+#toast {
+    visibility: hidden;
+    min-width: 250px;
+    background-color: var(--primary);
+    color: white;
+    text-align: center;
+    border-radius: 8px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1000;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    font-size: 16px;
+    opacity: 0;
+    transition: opacity 0.5s ease, bottom 0.5s ease;
+}
+
+#toast.show {
+    visibility: visible;
+    opacity: 1;
+    bottom: 50px;
+}
 </style>
 </head>
 
@@ -187,25 +232,55 @@
 
 </div>
 
+<!-- Loader -->
+<div id="loader"></div>
+<!-- Toast -->
+<div id="toast"></div>
+
 <script>
+// Initialize phone from localStorage
 let phone = localStorage.getItem("phone") || "07XXXXXXXX";
 document.getElementById("displayNumber").textContent = phone;
 document.getElementById("mpesaInput").value = phone;
 
+// Toggle edit section
+function toggleEdit() {
+    const edit = document.getElementById("editSection");
+    edit.style.display = edit.style.display === "none" ? "block" : "none";
+}
+
+// Save new number
 function saveNumber() {
     let newNum = document.getElementById("mpesaInput").value.trim();
-    if (newNum.length < 10) {
-        alert("Please enter a valid Safaricom number.");
+    if (!/^07\d{8}$/.test(newNum)) {
+        showToast("Please enter a valid Safaricom number.");
         return;
     }
     localStorage.setItem("phone", newNum);
     document.getElementById("displayNumber").textContent = newNum;
     document.getElementById("editSection").style.display = "none";
+    showToast("Number updated successfully!");
 }
 
-    function goNext() {
-        window.location.href = "Verificationpage.html"; 
-    }
+// Continue to next page
+function goNext() {
+    showToast("Redirecting to Verification...");
+    document.getElementById("loader").style.display = "block";
+
+    setTimeout(() => {
+        window.location.href = "Verificationpage.html";
+    }, 2000);
+}
+
+// Toast helper
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.className = "show";
+    setTimeout(() => {
+        toast.className = toast.className.replace("show", "");
+    }, 3000);
+}
 </script>
 
 </body>

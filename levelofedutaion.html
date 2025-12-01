@@ -113,6 +113,52 @@
         box-shadow: 0 7px 18px rgba(0,128,64,0.25);
     }
 
+    /* TOAST */
+    #toast {
+        visibility: hidden;
+        min-width: 250px;
+        background-color: var(--primary);
+        color: white;
+        text-align: center;
+        border-radius: 8px;
+        padding: 16px;
+        position: fixed;
+        z-index: 1000;
+        left: 50%;
+        bottom: 30px;
+        transform: translateX(-50%);
+        font-size: 16px;
+        opacity: 0;
+        transition: opacity 0.5s ease, bottom 0.5s ease;
+    }
+
+    #toast.show {
+        visibility: visible;
+        opacity: 1;
+        bottom: 50px;
+    }
+
+    /* LOADING SPINNER */
+    #loader {
+        display: none;
+        border: 6px solid #f3f3f3;
+        border-top: 6px solid var(--primary);
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1001;
+    }
+
+    @keyframes spin {
+        0% { transform: translate(-50%, -50%) rotate(0deg); }
+        100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
 </style>
 </head>
 <body>
@@ -141,26 +187,67 @@
 
     <div class="group">
         <label>Skills / Expertise</label>
-        <textarea rows="3" placeholder="E.g. Carpentry, Programming, Tailoring, Teaching"></textarea>
+        <textarea id="skills" rows="3" placeholder="E.g. Carpentry, Programming, Tailoring, Teaching"></textarea>
     </div>
 
     <div class="group">
         <label>Monthly Income (Ksh)</label>
-        <input type="number" placeholder="E.g. 15000">
+        <input type="number" id="income" placeholder="E.g. 15000">
     </div>
 
     <div class="group">
         <label>Additional Information</label>
-        <textarea rows="3" placeholder="Business experience, community work, achievements..."></textarea>
+        <textarea id="additional" rows="3" placeholder="Business experience, community work, achievements..."></textarea>
     </div>
 
     <button class="btn" onclick="nextPage()">Continue</button>
 
 </div>
 
+<!-- Toast -->
+<div id="toast"></div>
+
+<!-- Loader -->
+<div id="loader"></div>
+
 <script>
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.className = "show";
+    setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+}
+
+function showLoader() {
+    document.getElementById("loader").style.display = "block";
+}
+
 function nextPage() {
-    window.location.href = "purposepage.html";
+    const education = document.getElementById("education").value;
+    const income = document.getElementById("income").value.trim();
+
+    if (!education) {
+        showToast("Please select your education level.");
+        return;
+    }
+
+    if (!income || income <= 0) {
+        showToast("Please enter a valid monthly income.");
+        return;
+    }
+
+    // Optionally, save profile info to localStorage
+    localStorage.setItem("education", education);
+    localStorage.setItem("skills", document.getElementById("skills").value.trim());
+    localStorage.setItem("income", income);
+    localStorage.setItem("additionalInfo", document.getElementById("additional").value.trim());
+
+    showToast("Saving profile...");
+    showLoader();
+
+    setTimeout(() => {
+        window.location.href = "purposepage.html";
+    }, 2000);
 }
 </script>
 

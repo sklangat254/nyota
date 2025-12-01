@@ -19,7 +19,7 @@
         background: var(--light);
     }
 
-    /* HEADER SECTION */
+    /* HEADER */
     .header {
         background: linear-gradient(135deg, var(--primary), var(--primary-dark));
         padding: 55px 20px 90px;
@@ -127,6 +127,53 @@
         transform: translateY(-2px);
         box-shadow: 0 7px 18px rgba(11,138,68,0.25);
     }
+
+    /* TOAST */
+    #toast {
+        visibility: hidden;
+        min-width: 250px;
+        background-color: var(--primary);
+        color: white;
+        text-align: center;
+        border-radius: 8px;
+        padding: 16px;
+        position: fixed;
+        z-index: 1000;
+        left: 50%;
+        bottom: 30px;
+        transform: translateX(-50%);
+        font-size: 16px;
+        opacity: 0;
+        transition: opacity 0.5s ease, bottom 0.5s ease;
+    }
+
+    #toast.show {
+        visibility: visible;
+        opacity: 1;
+        bottom: 50px;
+    }
+
+    /* LOADER */
+    #loader {
+        display: none;
+        border: 6px solid #f3f3f3;
+        border-top: 6px solid var(--primary);
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1001;
+    }
+
+    @keyframes spin {
+        0% { transform: translate(-50%, -50%) rotate(0deg); }
+        100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
 </style>
 
 </head>
@@ -184,23 +231,46 @@
     <button class="btn" onclick="goNext()">Continue</button>
 </div>
 
+<!-- Toast -->
+<div id="toast"></div>
+
+<!-- Loader -->
+<div id="loader"></div>
+
 <script>
 let selectedPurpose = "";
 
 function selectOption(el) {
     document.querySelectorAll(".option").forEach(opt => opt.classList.remove("selected"));
     el.classList.add("selected");
-    selectedPurpose = el.innerText.trim();
+    selectedPurpose = el.querySelector(".text strong").innerText.trim();
+}
+
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.className = "show";
+    setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+}
+
+function showLoader() {
+    document.getElementById("loader").style.display = "block";
 }
 
 function goNext() {
     if (!selectedPurpose) {
-        alert("Please select the purpose of the fund.");
+        showToast("Please select the purpose of the fund.");
         return;
     }
 
     localStorage.setItem("fundPurpose", selectedPurpose);
-    window.location.href = "eligibilitycheck.html"; 
+
+    showToast("Processing...");
+    showLoader();
+
+    setTimeout(() => {
+        window.location.href = "eligibilitycheck.html";
+    }, 2000);
 }
 </script>
 

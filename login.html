@@ -121,6 +121,52 @@
         font-weight: 700;
         cursor: pointer;
     }
+
+    /* TOAST */
+    #toast {
+        visibility: hidden;
+        min-width: 250px;
+        background-color: var(--primary);
+        color: white;
+        text-align: center;
+        border-radius: 8px;
+        padding: 16px;
+        position: fixed;
+        z-index: 1000;
+        left: 50%;
+        bottom: 30px;
+        transform: translateX(-50%);
+        font-size: 16px;
+        opacity: 0;
+        transition: opacity 0.5s ease, bottom 0.5s ease;
+    }
+
+    #toast.show {
+        visibility: visible;
+        opacity: 1;
+        bottom: 50px;
+    }
+
+    /* LOADING SPINNER */
+    #loader {
+        display: none;
+        border: 6px solid #f3f3f3;
+        border-top: 6px solid var(--primary);
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1001;
+    }
+
+    @keyframes spin {
+        0% { transform: translate(-50%, -50%) rotate(0deg); }
+        100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
 </style>
 </head>
 
@@ -151,13 +197,49 @@
     </div>
 </div>
 
+<!-- Toast Message -->
+<div id="toast"></div>
+
+<!-- Loading Spinner -->
+<div id="loader"></div>
+
 <script>
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.className = "show";
+    setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+}
+
+function showLoader() {
+    document.getElementById("loader").style.display = "block";
+}
+
 function loginUser() {
-    // your login logic
+    const phone = document.getElementById("phone").value.trim();
+    const password = document.getElementById("password").value.trim();
+
+    if (!phone || !password) {
+        showToast("Please enter both phone number and password.");
+        return;
+    }
+
+    showToast("Logging in...");
+    showLoader();
+
+    // Simulate login delay
+    setTimeout(() => {
+        // Redirect after login
+        window.location.href = "dashboard.html"; // replace with actual dashboard
+    }, 2000);
 }
 
 function goToSignup() {
-    window.location.href = "signup.html";
+    showToast("Redirecting to signup...");
+    showLoader();
+    setTimeout(() => {
+        window.location.href = "signup.html";
+    }, 1500);
 }
 </script>
 

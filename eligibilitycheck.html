@@ -20,7 +20,6 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    overflow: hidden;
     text-align: center;
 }
 
@@ -36,7 +35,7 @@ body {
 }
 
 /* Spinner */
-.ring {
+#loader {
     width: 110px;
     height: 110px;
     border-radius: 50%;
@@ -70,7 +69,6 @@ body {
     fill: white;
 }
 
-/* Pop-in animation for tick */
 @keyframes popIn {
     from {transform: scale(0);}
     to {transform: scale(1);}
@@ -97,7 +95,7 @@ button {
     border: none;
     padding: 12px 35px;
     font-size: 1rem;
-    border-radius: 8px;
+    border-radius: 50px;
     cursor: pointer;
     transition: background 0.3s ease;
 }
@@ -106,29 +104,37 @@ button:hover {
     background: var(--primary-dark);
 }
 
-/* Loading dots animation */
-.loading-dots span {
-    animation: blink 1.5s infinite;
-    font-weight: bold;
-    font-size: 1.5rem;
-    color: var(--primary);
+/* Toast */
+#toast {
+    visibility: hidden;
+    min-width: 250px;
+    background-color: var(--primary);
+    color: white;
+    text-align: center;
+    border-radius: 8px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1000;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    font-size: 16px;
+    opacity: 0;
+    transition: opacity 0.5s ease, bottom 0.5s ease;
 }
 
-@keyframes blink {
-    0%, 20% {opacity: 0;}
-    50% {opacity: 1;}
-    100% {opacity: 0;}
+#toast.show {
+    visibility: visible;
+    opacity: 1;
+    bottom: 50px;
 }
-
-.loading-dots span:nth-child(2){ animation-delay: .3s; }
-.loading-dots span:nth-child(3){ animation-delay: .6s; }
 </style>
 </head>
 <body>
 
 <div class="container" id="container">
     <!-- LOADING ANIMATION -->
-    <div class="ring" id="loader"></div>
+    <div id="loader"></div>
 
     <h1>Checking Your Eligibility</h1>
 
@@ -142,25 +148,44 @@ button:hover {
     </p>
 </div>
 
-<script>
-    // After 3.5 seconds, replace spinner with tick
-    setTimeout(() => {
-        const container = document.getElementById('container');
-        container.innerHTML = `
-            <div class="tick-circle">
-                <svg viewBox="0 0 52 52">
-                    <path d="M14 27l10 10 20-20" stroke="white" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </div>
-            <h1>Congratulations!</h1>
-            <p>You qualify for <strong>KES 50,000</strong>.</p>
-            <button onclick="proceed()">Proceed</button>
-        `;
-    }, 3500);
+<!-- Toast -->
+<div id="toast"></div>
 
-    function proceed() {
-        window.location.href = 'limitpage.html'; // Replace with your actual next page
-    }
+<script>
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.className = "show";
+    setTimeout(() => {
+        toast.className = toast.className.replace("show", "");
+    }, 3000);
+}
+
+// Simulate eligibility check
+setTimeout(() => {
+    const container = document.getElementById('container');
+    container.innerHTML = `
+        <div class="tick-circle">
+            <svg viewBox="0 0 52 52">
+                <path d="M14 27l10 10 20-20" stroke="white" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+        <h1>Congratulations!</h1>
+        <p>You qualify for <strong>KES 50,000</strong>.</p>
+        <button onclick="proceed()">Proceed</button>
+    `;
+    showToast("Eligibility check complete!");
+    
+    // Save qualified amount in localStorage
+    localStorage.setItem("qualifiedAmount", 50000);
+}, 3500);
+
+function proceed() {
+    showToast("Redirecting...");
+    setTimeout(() => {
+        window.location.href = 'limitpage.html'; // Next page
+    }, 1000);
+}
 </script>
 
 </body>
